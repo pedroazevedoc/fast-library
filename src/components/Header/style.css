@@ -7,7 +7,7 @@ header {
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 0 20px;
 }
 
@@ -20,4 +20,20 @@ header a {
 
 header a:hover {
   color: #000;
+}
+
+.logo {
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.favoritos {
+  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 4px;
 }

@@ -4,9 +4,9 @@ import './style.css';
 function Header() {
   return (
     <header>
-      <h1>Fast Library</h1>
+      <Link to="/" className="logo">Fast Library</Link>
       <div className="menu">
-        <Link to="/">Home</Link>
+        <Link to="/favoritos" className="favoritos">Favoritos</Link>
         <Link to="/about">Sobre</Link>
       </div>
     </header>
