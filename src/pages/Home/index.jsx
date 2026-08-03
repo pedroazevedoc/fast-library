@@ -1,10 +1,42 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import api from '../../services/api';
+import './style.css';
+
 function Home() {
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await api.get('search.json?q=javascript', {
+          params: {
+            limit: 10,
+          },
+        });
+        setBooks(response.data.docs);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+      }
+    };
+
+    fetchBooks();
+  }, []);
+
   return (
-    <div>
-      <h2>Bem vindo a Fast Library</h2>
-      <br />
-      <p>Conheça nossa biblioteca de livros</p>
-      <br />
+    <div className="container">
+      <div className="book-list">
+        {books.map((book) => (
+          <article key={book.key} className="book-item">
+            <h3>{book.title}</h3>
+            <p>Autor: {book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>
+            <p>Primeira Publicação: {book.first_publish_year || 'Unknown'}</p>
+            <img src={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : 'https://via.placeholder.com/150'} alt={book.title} />
+            <Link to={`/book/${book.key.replace('/works/', '')}`}>Ver Detalhes</Link>
+          </article>
+        ))}
+        {books.length === 0 && <p>No books found.</p>}
+      </div>
     </div>
   );
 }
