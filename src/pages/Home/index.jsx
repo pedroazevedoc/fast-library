@@ -5,6 +5,7 @@ import './style.css';
 
 function Home() {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -17,11 +18,21 @@ function Home() {
         setBooks(response.data.docs);
       } catch (error) {
         console.error('Error fetching books:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchBooks();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="loading">
+        <p>Carregando livros...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container">
