@@ -7,7 +7,7 @@ function Header() {
       <h1>Fast Library</h1>
       <div className="menu">
         <Link to="/">Home</Link>
-        <Link to="/sobre">Sobre</Link>
+        <Link to="/about">Sobre</Link>
       </div>
     </header>
   );

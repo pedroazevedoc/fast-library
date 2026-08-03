@@ -1,4 +1,4 @@
-function Sobre() {
+function About() {
   return (
     <div>
       <h2>Sobre a Fast Library</h2>
@@ -10,4 +10,4 @@ function Sobre() {
   );
 }
 
-export default Sobre;
+export default About;
