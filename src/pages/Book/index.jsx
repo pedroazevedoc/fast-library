@@ -25,6 +25,22 @@ function Book() {
     fetchBook();
   }, [id, navigation]);
 
+  const favoriteBook = () => {
+    return () => {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+      const isAlreadyFavorite = favorites.some(favorite => favorite === book.key);
+
+      if (!isAlreadyFavorite) {
+        favorites.push(book.key);
+        localStorage.setItem('@favorites', JSON.stringify(book)); // Armazena o livro inteiro facilitando a exibição na página de favoritos
+        alert('Livro adicionado aos favoritos!');
+      } else {
+        alert('Livro já está nos favoritos!');
+      }
+    };
+  };
+
   if (loading) {
     return (
       <div className="loading">
@@ -55,7 +71,7 @@ function Book() {
             <h4>Autor: {book.authors?.[0]?.author?.key || 'Desconhecido'}</h4>
 
             <div className="area-buttons">
-              <button>Favoritar</button>
+              <button onClick={favoriteBook(book.key)}>Favoritar</button>
               <button>
                 <a href={`https://openlibrary.org${book.key}`} target="blank" rel="external">
                   Ver no Open Library
