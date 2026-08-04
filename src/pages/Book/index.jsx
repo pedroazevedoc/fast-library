@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import './style.css';
 
 function Book() {
+  const navigation = useNavigate();
   const { id } = useParams();
   const [book, setBook] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,13 +16,14 @@ function Book() {
         setBook(response.data);
       } catch (error) {
         console.error('Error fetching book:', error);
+        navigation('/', { replace: true }); // Redireciona para a página inicial em caso de erro
       } finally {
         setLoading(false);
       }
     };
 
     fetchBook();
-  }, [id]);
+  }, [id, navigation]);
 
   if (loading) {
     return (
@@ -54,14 +56,20 @@ function Book() {
 
             <div className="area-buttons">
               <button>Favoritar</button>
-              {/* <button>A</button> */}
+              <button>
+                <a href={`https://openlibrary.org${book.key}`} target="blank" rel="external">
+                  Ver no Open Library
+                </a>
+              </button>
             </div>
           </div>
         </div>
 
+        {/* Descrição */}
         <h3>Descrição:</h3>
         <p>{book.description || 'Nenhuma descrição disponível.'}</p>
 
+        {/* Assuntos */}
         <h3>Assuntos:</h3>
         {book.subjects && book.subjects.length > 0 ? (
           <ul>
@@ -73,12 +81,15 @@ function Book() {
           <span>Nenhum assunto disponível.</span>
         )}
 
+        {/* Outras capas */}
         {book.covers.length > 1 && (
-          <div className="additional-covers">
+          <div>
             <h4>Outras capas:</h4>
+            <div className="additional-covers">
               {book.covers.slice(1).map((coverId, index) => (
                 <img key={index} src={`https://covers.openlibrary.org/b/id/${coverId}-M.jpg`} alt={`Capa adicional ${index + 1}`} />
               ))}
+            </div>
           </div>
         )}
       </div>
