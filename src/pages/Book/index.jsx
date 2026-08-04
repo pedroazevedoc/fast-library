@@ -10,10 +10,25 @@ function Book() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchBook = async () => {
+    const fetchBookAndAuthor = async () => {
       try {
-        const response = await api.get(`/works/${id}`);
-        setBook(response.data);
+        const bookResponse = await api.get(`/works/${id}`);
+        const bookData = bookResponse.data;
+
+        // Busca informações do autor se houver autores disponíveis
+        if (bookData.authors && bookData.authors.length > 0) {
+          try {
+            const authorResponse = await api.get(`${bookData.authors[0].author.key}.json`);
+            const authorData = authorResponse.data;
+
+            bookData.authors[0].author = authorData; // Atualiza os dados do autor no estado do livro
+          } catch (authorError) {
+            console.error('Error fetching author:', authorError);
+          }
+        }
+
+        setBook(bookData);
+        console.log('Book data:', bookData); // Log do livro
       } catch (error) {
         console.error('Error fetching book:', error);
         navigation('/', { replace: true }); // Redireciona para a página inicial em caso de erro
@@ -22,7 +37,7 @@ function Book() {
       }
     };
 
-    fetchBook();
+    fetchBookAndAuthor();
   }, [id, navigation]);
 
   const favoriteBook = () => {
@@ -68,10 +83,10 @@ function Book() {
           {/* Informações do livro */}
           <div className="book-info">
             <h1>{book.title}</h1>
-            <h4>Autor: {book.authors?.[0]?.author?.key || 'Desconhecido'}</h4>
+            <h4>Autor: {book.authors?.[0]?.author?.name || 'Desconhecido'}</h4>
 
             <div className="area-buttons">
-              <button onClick={favoriteBook(book.key)}>Favoritar</button>
+              <button onClick={favoriteBook()}>Favoritar</button>
               <button>
                 <a href={`https://openlibrary.org${book.key}`} target="blank" rel="external">
                   Ver no Open Library
