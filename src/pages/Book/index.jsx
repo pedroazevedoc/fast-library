@@ -1,12 +1,87 @@
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import api from "../../services/api";
+import './style.css';
 
 function Book() {
   const { id } = useParams();
+  const [book, setBook] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBook = async () => {
+      try {
+        const response = await api.get(`/works/${id}`);
+        setBook(response.data);
+      } catch (error) {
+        console.error('Error fetching book:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBook();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="loading">
+        <p>Carregando informações do livro...</p>
+      </div>
+    );
+  }
+
+  if (!book) {
+    return (
+      <div className="no-book">
+        <p>Livro não encontrado.</p>
+        <span>Verifique sua conexão com a internet ou tente novamente mais tarde.</span>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <h2>Livro {id}</h2>
-      <p>Informações sobre o livro</p>
+    <div className="book-container">
+      <div className="book-details">
+        <div className="book-header">
+          {/* Imagem da capa principal */}
+          <img src={book.covers?.[0] ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` : 'https://via.placeholder.com/150'} alt={book.title} />
+
+          {/* Informações do livro */}
+          <div className="book-info">
+            <h1>{book.title}</h1>
+            <h4>Autor: {book.authors?.[0]?.author?.key || 'Desconhecido'}</h4>
+
+            <div className="area-buttons">
+              <button>Favoritar</button>
+              {/* <button>A</button> */}
+            </div>
+          </div>
+        </div>
+
+        <h3>Descrição:</h3>
+        <p>{book.description || 'Nenhuma descrição disponível.'}</p>
+
+        <h3>Assuntos:</h3>
+        {book.subjects && book.subjects.length > 0 ? (
+          <ul>
+            {book.subjects.map((subject, index) => (
+              <li key={index}>{subject}</li>
+            ))}
+          </ul>
+        ) : (
+          <span>Nenhum assunto disponível.</span>
+        )}
+
+        {book.covers.length > 1 && (
+          <div className="additional-covers">
+            <h4>Outras capas:</h4>
+              {book.covers.slice(1).map((coverId, index) => (
+                <img key={index} src={`https://covers.openlibrary.org/b/id/${coverId}-M.jpg`} alt={`Capa adicional ${index + 1}`} />
+              ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
