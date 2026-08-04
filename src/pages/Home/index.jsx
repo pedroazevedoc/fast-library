@@ -34,6 +34,15 @@ function Home() {
     );
   }
 
+  if (books.length === 0) {
+    return (
+      <div className="no-books">
+        <p>Nenhum livro encontrado.</p>
+        <span>Verifique sua conexão com a internet ou tente novamente mais tarde.</span>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <div className="book-list">
@@ -46,7 +55,6 @@ function Home() {
             <Link to={`/book/${book.key.replace('/works/', '')}`}>Ver Detalhes</Link>
           </article>
         ))}
-        {books.length === 0 && <p>No books found.</p>}
       </div>
     </div>
   );
