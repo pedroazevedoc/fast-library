@@ -28,7 +28,6 @@ function Book() {
         }
 
         setBook(bookData);
-        console.log('Book data:', bookData); // Log do livro
       } catch (error) {
         console.error('Error fetching book:', error);
         navigation('/', { replace: true }); // Redireciona para a página inicial em caso de erro
@@ -98,7 +97,7 @@ function Book() {
 
         {/* Descrição */}
         <h3>Descrição:</h3>
-        <p>{book.description || 'Nenhuma descrição disponível.'}</p>
+        <p>{book.description.value || book.description || 'Nenhuma descrição disponível.'}</p>
 
         {/* Assuntos */}
         <h3>Assuntos:</h3>
