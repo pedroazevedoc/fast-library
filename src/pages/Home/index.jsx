@@ -44,7 +44,7 @@ function Home() {
   }
 
   return (
-    <div className="container">
+    <div className="home-container">
       <div className="book-list">
         {books.map((book) => (
           <article key={book.key} className="book-item">
