@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
-import './style.css';
+import './home.css';
 
 function Home() {
   const [books, setBooks] = useState([]);

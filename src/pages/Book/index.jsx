@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
-import './style.css';
+import './book.css';
 
 function Book() {
   const navigation = useNavigate();
