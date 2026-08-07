@@ -4,6 +4,7 @@ import About from './pages/About';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
 import Book from './pages/Book';
+import Favorites from './pages/Favorites';
 
 function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/book/:id" element={<Book />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/about" element={<About />} />
 
         <Route path="*" element={<NotFound />} />

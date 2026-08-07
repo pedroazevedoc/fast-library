@@ -6,7 +6,7 @@ function Header() {
     <header>
       <Link to="/" className="logo">Fast Library</Link>
       <div className="menu">
-        <Link to="/favoritos" className="favoritos">Favoritos</Link>
+        <Link to="/favorites" className="favoritos">Favoritos</Link>
         <Link to="/about">Sobre</Link>
       </div>
     </header>
