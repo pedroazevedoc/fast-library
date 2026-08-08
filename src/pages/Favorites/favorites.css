@@ -26,8 +26,20 @@
   margin-bottom: 20px;
 }
 
-.favorites-list span {
+.favorite-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+.favorites-list p {
   font-size: 1rem;
+}
+
+.favorites-list span {
+  font-size: 0.9rem;
+  color: #999;
 }
 
 .favorites-list ul {
@@ -49,7 +61,7 @@
   margin-bottom: 10px;
 }
 
-.favorites-list div {
+.favorites-actions {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,6 +76,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-right: 10px;
 }
 
 .favorites-list a:hover {
