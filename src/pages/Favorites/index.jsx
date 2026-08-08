@@ -40,7 +40,10 @@ function Favorites() {
   return (
     <div className="favorites-container">
       <div className="favorites-list">
-        <h1>Favoritos</h1>
+        <div className="favorites-header">
+          <h1>Favoritos</h1>
+          <span>{books.length}</span>
+        </div>
         <ul>
           {books.map((book) => {
             return (
