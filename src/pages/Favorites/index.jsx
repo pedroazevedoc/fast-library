@@ -12,6 +12,14 @@ function Favorites() {
     setLoading(false);
   }, []);
 
+  const handleDeleteFavorite = (key) => {
+    return () => {
+      const updatedFavorites = films.filter((film) => film.key !== key);
+      setFilms(updatedFavorites);
+      localStorage.setItem('@favorites', JSON.stringify(updatedFavorites));
+    };
+  };
+
   if (loading) {
     return (
       <div className="loading">
@@ -40,7 +48,7 @@ function Favorites() {
                 <span>{film.title}</span>
                 <div>
                   <Link to={`/book/${film.key.replace('/works/', '')}`}>Ver Detalhes</Link>
-                  <button>Excluir</button>
+                  <button onClick={handleDeleteFavorite(film.key)}>Excluir</button>
                 </div>
               </li>
             )
