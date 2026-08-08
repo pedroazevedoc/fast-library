@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
-import './style.css';
+import './book.css';
 
 function Book() {
   const navigation = useNavigate();
@@ -41,13 +41,14 @@ function Book() {
 
   const favoriteBook = () => {
     return () => {
-      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const myFavorites = localStorage.getItem('@favorites');
+      let favorites = JSON.parse(myFavorites) || [];
 
-      const isAlreadyFavorite = favorites.some(favorite => favorite === book.key);
+      const isAlreadyFavoriteIndex = favorites.findIndex((favorite) => favorite.key === book.key);
 
-      if (!isAlreadyFavorite) {
-        favorites.push(book.key);
-        localStorage.setItem('@favorites', JSON.stringify(book)); // Armazena o livro inteiro facilitando a exibição na página de favoritos
+      if (isAlreadyFavoriteIndex === -1) {
+        favorites.push(book);
+        localStorage.setItem('@favorites', JSON.stringify(favorites)); // Armazena o livro inteiro facilitando a exibição na página de favoritos
         alert('Livro adicionado aos favoritos!');
       } else {
         alert('Livro já está nos favoritos!');
