@@ -50,11 +50,18 @@ function Home() {
       <div className="book-list">
         {books.map((book) => (
           <article key={book.key} className="book-item">
-            <h3>{book.title}</h3>
-            <p>Autor: {book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>
-            <p>Primeira Publicação: {book.first_publish_year || 'Unknown'}</p>
+            <div className="item-header">
+              <h3>{book.title}</h3>
+              <p className="subtitle">{book.subtitle || ''}</p>
+              <p>
+                <strong>{book.author_name ? (book.author_name.length > 1 ? 'Autores: ' : 'Autor(a): ') : 'Autor: '}</strong> 
+                {book.author_name ? book.author_name.join(', ') : 'Desconhecido'}
+              </p>
+            </div>
             <img src={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : 'https://via.placeholder.com/150'} alt={book.title} />
-            <Link to={`/book/${book.key.replace('/works/', '')}`}>Ver Detalhes</Link>
+            <div className="item-footer">
+              <Link to={`/book/${book.key.replace('/works/', '')}`}>Ver Detalhes</Link>
+            </div>
           </article>
         ))}
       </div>
