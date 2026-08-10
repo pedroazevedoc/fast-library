@@ -1,0 +1,29 @@
+.about-container {
+  padding: 20px 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.about-container span {
+  font-size: 1rem;
+  color: #666;
+}
+
+.about-container a {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #007bff;
+  margin-top: 20px;
+}
