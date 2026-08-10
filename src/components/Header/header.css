@@ -8,13 +8,18 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0 20px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 800px);
 }
 
 header a {
   color: #333;
   text-decoration: none;
-  margin-right: 20px;
   transition: color 0.3s ease;
 }
 
@@ -36,4 +41,5 @@ header a:hover {
   color: #fff;
   padding: 5px 14px;
   border-radius: 4px;
+  margin-right: 20px;
 }

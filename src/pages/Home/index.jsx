@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import api from '../../services/api';
 import './home.css';
 import { toast } from 'react-toastify';
 
 function Home() {
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('q') || 'trending_score_hourly_sum:[1 TO 100]'; // Se não houver query, busca os livros mais populares
+
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBooks = async () => {
+      setLoading(true);
       try {
-        const response = await api.get('search.json?q=javascript', {
+        const response = await api.get(`search.json?q=${query}`, {
           params: {
-            limit: 10,
+            limit: 25,
           },
         });
         setBooks(response.data.docs);
@@ -26,7 +30,7 @@ function Home() {
     };
 
     fetchBooks();
-  }, []);
+  }, [query]);
 
   if (loading) {
     return (
