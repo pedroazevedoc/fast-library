@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import './home.css';
+import { toast } from 'react-toastify';
 
 function Home() {
   const [books, setBooks] = useState([]);
@@ -18,6 +19,7 @@ function Home() {
         setBooks(response.data.docs);
       } catch (error) {
         console.error('Error fetching books:', error);
+        toast.error('Erro ao buscar livros. Verifique sua conexão com a internet ou tente novamente mais tarde.');
       } finally {
         setLoading(false);
       }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import './favorites.css';
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Favorites() {
   const [loading, setLoading] = useState(true);
@@ -17,6 +18,7 @@ function Favorites() {
       const updatedFavorites = books.filter((book) => book.key !== key);
       setBooks(updatedFavorites);
       localStorage.setItem('@favorites', JSON.stringify(updatedFavorites));
+      toast.success('Livro removido dos favoritos!');
     };
   };
 

@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import './book.css';
+import { toast } from "react-toastify";
 
 function Book() {
   const navigation = useNavigate();
@@ -31,6 +32,7 @@ function Book() {
       } catch (error) {
         console.error('Error fetching book:', error);
         navigation('/', { replace: true }); // Redireciona para a página inicial em caso de erro
+        toast.error('Erro ao buscar informações do livro. Redirecionando para a página inicial.');
       } finally {
         setLoading(false);
       }
@@ -49,9 +51,10 @@ function Book() {
       if (isAlreadyFavoriteIndex === -1) {
         favorites.push(book);
         localStorage.setItem('@favorites', JSON.stringify(favorites)); // Armazena o livro inteiro facilitando a exibição na página de favoritos
-        alert('Livro adicionado aos favoritos!');
+        
+        toast.success('Livro adicionado aos favoritos!');
       } else {
-        alert('Livro já está nos favoritos!');
+        toast.warn('Livro já está nos favoritos!');
       }
     };
   };
