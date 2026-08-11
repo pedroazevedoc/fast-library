@@ -1,16 +1,34 @@
-# React + Vite
+# Biblioteca Rápida (Fast Library)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto de busca de livros, autores e editoras, desenvolvido com o objetivo de fornecer uma experiência rápida e eficiente para os usuários que desejam encontrar informações sobre obras literárias. A biblioteca utiliza uma interface amigável e recursos avançados de pesquisa para facilitar a navegação e a descoberta de novos títulos.
+Os dados são obtidos da API da Open Library, garantindo que as informações estejam sempre atualizadas e abrangentes.
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
+- **React**: Para a construção da interface do usuário.
+- **Axios**: Para realizar requisições HTTP à API da Open Library.
+- **React Router DOM**: Para a navegação entre as diferentes páginas da aplicação.
+- **React Toastify**: Para exibir notificações ao usuário.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Como Executar o Projeto
+1. Clone o repositório para sua máquina local.
 
-## React Compiler
+2. Navegue até o diretório do projeto.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+3. Instale as dependências utilizando o comando:
+   ```bash
+   npm install
+   ```
 
-## Expanding the ESLint configuration
+4. Inicie o servidor de desenvolvimento com o comando:
+   ```bash
+   # Para desenvolvimento
+   npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+   # Para produção
+   npm run build
+   ```
+   
+5. Abra o navegador e acesse `http://localhost:5173` para visualizar a aplicação.
+
+6. Para realizar uma busca, digite o nome do livro, autor ou editora na barra de pesquisa e pressione Enter. Os resultados serão exibidos na tela.
+
